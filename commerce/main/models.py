@@ -23,14 +23,14 @@ class Product (models.Model):
 
 
 class Review (models.Model):
-    user_name = models.CharField(max_length=200)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField()
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name='reviews')
 
     def __str__(self):
-        return self.user_name
+        return self.user
 
 
 class Cart (models.Model):
@@ -50,7 +50,6 @@ class CartItem (models.Model):
         return f"{self.product.title} ({self.quantity})"
 
 class Order(models.Model):
-    id  = models.IntegerField()
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     total_price = models.IntegerField()
     status = models.CharField(max_length=200)

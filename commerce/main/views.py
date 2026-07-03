@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from .permissons import IsOwnerOrReadOnly
 from rest_framework.permissions import AllowAny,IsAuthenticated,IsAuthenticatedOrReadOnly,IsAdminUser
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter,OrderingFilter
@@ -58,7 +58,7 @@ class ReviewListCreateAPIView(generics.ListCreateAPIView):
 class ReviewRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
 
 class CartListCreateAPIView(generics.ListCreateAPIView):
     queryset = Cart.objects.all()
