@@ -87,6 +87,11 @@ class OrderItemSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('narx faqat musbat bolishi kerak')
         return value
 
+    def validate(self,attrs):
+        if attrs['product'].stock < attrs['quantity']:
+            raise serializers.ValidationError('Soralgan miqdorda mahsulot yetarli emas')
+        return attrs
+
     class Meta:
         model = OrderItem
         fields = '__all__'
