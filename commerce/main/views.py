@@ -4,7 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter,OrderingFilter
 from .serializers import *
 from .models import *
-
+from rest_framework.parsers import MultiPartParser,FormParser
 from rest_framework import generics
 
 class RegisterAPIView(generics.CreateAPIView):
@@ -27,7 +27,8 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [IsAdminUser]
-    filter_backends = [SearchFilter,OrderingFilter,DjangoFilterBackend]
+
+    filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
 
     search_fields = [
         'title',
@@ -40,10 +41,11 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
         'title',
     ]
 
-    filterset_fields =  [
+    filterset_fields = [
         'category',
         'stock',
     ]
+    parser_classes = [MultiPartParser,FormParser]
 
 class ProductRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()

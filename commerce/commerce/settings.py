@@ -136,3 +136,13 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 5,
 }
+
+SPECTACULAR_SETTINGS = {
+    'TITLE':'E-Commerce API',
+    'VERSION':'1.0.0',
+    "DESCRIPTION": "REST API for managing products, carts, orders, reviews and wishlists.",
+
+}
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / 'media'
